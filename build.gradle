@@ -1,0 +1,43 @@
+plugins {
+    id 'java'
+    id "application"
+}
+
+ext {
+    javaMainClass = "main.Main"
+}
+
+application {
+    mainClassName = javaMainClass
+}
+
+jar {
+    duplicatesStrategy = DuplicatesStrategy.INCLUDE
+
+    manifest {
+        attributes "Main-Class": "main.Main"
+    }
+
+    from {
+        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+
+    exclude('META-INF/*.SF')
+    exclude('META-INF/*.DSA')
+    exclude('META-INF/*.RSA')
+}
+
+group 'org.secreter'
+version 'beta'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+    implementation 'com.codeborne:selenide:6.1.0'
+    compileOnly 'org.projectlombok:lombok:1.18.22'
+    annotationProcessor 'org.projectlombok:lombok:1.18.22'
+    compile "com.beust:jcommander:1.71"
+}

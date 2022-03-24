@@ -1,0 +1,15 @@
+.idea
+.gradle
+build
+
+#run files
+run.bat
+runJar.sh
+
+#data file
+sercret.txt
+
+#gradle
+gradle
+gradlew
+gradlew.bat
