@@ -21,6 +21,7 @@ public class CustomDriverFactory extends ChromeDriverFactory {
         var capabilities = createCommonCapabilities(config, browser, proxy);
         var options = new ChromeOptions();
         options.addArguments("--incognito");
+        options.addArguments("--start-maximized");
         options.asMap().forEach(capabilities::setCapability);
         return new MutableCapabilities(capabilities);
     }

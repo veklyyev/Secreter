@@ -17,7 +17,7 @@ Run using cloned repository:
 Run using generated jar file:  
 ```
 #!/bin/bash
- java -jar ./Secreter-beta.jar --email 'your.name@libertymutual.com' --password 'your_password' --path sercret.txt --environment Development --url 'https://console.forge.lmig.com/artifact/somelink/secrets'
+ java -jar ./Secreter-beta.jar --email 'your.name@example.com' --password 'your_password' --path sercret.txt --environment Development --url 'https://console.forge.com/artifact/somelink/secrets'
 ```
 
 Secrets [secrets.txt]

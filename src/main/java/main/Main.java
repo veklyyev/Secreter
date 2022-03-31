@@ -86,9 +86,10 @@ public class Main {
 
     public void fillSecrets(String secretsUrl, String environment, List<Line> lines) {
         open(secretsUrl);
-        $(byXpath("//td//*[text()='" + environment + "']/../../descendant::span[@class='MuiButton-label']")).shouldBe(visible);
-        $(byXpath("//td//*[text()='" + environment + "']/../../descendant::span[@class='MuiButton-label']")).click();
-        $(byXpath("(//span[text()='Update Secret'])[2]")).click();
+        $(byXpath("//tbody/tr/td[2]/*[text()='" + environment + "']/../../descendant::span[@class='MuiButton-label']")).shouldBe(visible);
+        $(byXpath("//tbody/tr/td[2]/*[text()='" + environment + "']/../../descendant::span[@class='MuiButton-label']")).click();
+        $(byXpath("//div[@role='presentation' and not(contains(@style,'visibility: hidden'))]//span[text()='Update Secret']")).shouldBe(visible);
+        $(byXpath("//div[@role='presentation' and not(contains(@style,'visibility: hidden'))]//span[text()='Update Secret']")).click();
 
         $("input[type=checkbox]").shouldBe(exist);
         $("input[type=checkbox]").click();
