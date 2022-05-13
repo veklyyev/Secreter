@@ -13,6 +13,7 @@ import java.util.function.Function;
 import com.beust.jcommander.JCommander;
 import com.beust.jcommander.Parameter;
 import com.codeborne.selenide.Configuration;
+import io.netty.util.internal.StringUtil;
 import lombok.SneakyThrows;
 import main.driver.CustomDriverFactory;
 import main.model.Line;
@@ -59,6 +60,7 @@ public class Main {
                 .build()
                 .parse(args);
         var textLines = main.getTextLines(main.path);
+        textLines = main.removeEmptyAndComments(textLines);
         var linesCollection = main.convertToLinesList(textLines);
         main.login(main.email, main.password);
         main.fillSecrets(main.secretUrl, main.environment, linesCollection);
@@ -66,6 +68,12 @@ public class Main {
 
     public List<Line> convertToLinesList(Stream<String> lines) {
         return lines.map(CONVERTER).collect(Collectors.toCollection(LinkedList::new));
+    }
+
+    public Stream<String> removeEmptyAndComments(Stream<String> lines){
+        return lines
+                .filter(x -> !x.equals(StringUtil.EMPTY_STRING))
+                .filter(x -> !x.startsWith("#"));
     }
 
     @SneakyThrows(IOException.class)
